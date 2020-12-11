@@ -48,12 +48,14 @@ class BaseCollectionViewFlowLayout: RootCollectionViewFlowLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = super.layoutAttributesForItem(at: indexPath)
+        let attributes = super.layoutAttributesForItem(at: indexPath)!
+        print("**** ..BaseCollectionViewFlowLayout layoutAttributesForItem \(indexPath) new h=\(attributes.size.height) origin=\(attributes.frame.origin)")
         return attributes
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let array = super.layoutAttributesForElements(in: rect)
+        print("**** ..BaseCollectionViewFlowLayout layoutAttributesForElements \(rect)")
         return array
     }
 }

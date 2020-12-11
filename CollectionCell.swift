@@ -43,13 +43,25 @@ class CollectionCell: UICollectionViewCell {
         )
     }
     
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let superSize = super.sizeThatFits(size)
+        print("**** COLLECTION_VIEW CELL sizeThatFits \(superSize)")
+        return superSize
+    }
+    
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        let size = super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+        print("**** COLLECTION_VIEW CELL systemLayoutSizeFitting \(size)")
+        return size
+    }
+    
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         let attributes = super.preferredLayoutAttributesFitting(layoutAttributes).copy() as! UICollectionViewLayoutAttributes
         let oldFrame = attributes.frame
         
-        /*let sectionIndex = attributes.indexPath.section
+        let sectionIndex = attributes.indexPath.section
         let itemIndex = attributes.indexPath.item
-        print("**** TestCollectionViewFlowLayout CELL s\(sectionIndex) i\(itemIndex) \(ObjectIdentifier(attributes)) new h=\(attributes.size.height) origin=\(attributes.frame.origin)")*/
+        print("**** COLLECTION_VIEW CELL s\(sectionIndex) i\(itemIndex) \(ObjectIdentifier(attributes)) new h=\(attributes.size.height) origin=\(attributes.frame.origin)")
         
         self.frame = oldFrame
         self.setNeedsLayout()

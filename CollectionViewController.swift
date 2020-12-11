@@ -12,7 +12,7 @@ class CollectionViewController: UIViewController {
     var viewModel = CollectionViewModel()
     
     let collectionView: UICollectionView = {
-        let layout = TestCollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -90,7 +90,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     // MARK: Cell
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //print("**** WaterfallFlowLayout COLLECTION_VIEW size_ForItemAt \(indexPath)")
+        print("**** COLLECTION_VIEW size_ForItemAt \(indexPath)")
         let columnCount = 2//collectionView.frame.width > 850 ? 3 : collectionView.frame.width > 500 ? 2 : 1
         let sectionInsets = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
         let minimumLineSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumLineSpacingForSectionAt: indexPath.section)
@@ -101,7 +101,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //print("**** WaterfallFlowLayout COLLECTION_VIEW willDisplay \(indexPath)")
+        print("**** COLLECTION_VIEW willDisplay \(indexPath)")
         if indexPath.section == 0 && indexPath.item == viewModel.titles.count - 3 {
             viewModel.fetch(next: true) {
                 self.collectionView.reloadData()
@@ -110,7 +110,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //print("**** WaterfallFlowLayout COLLECTION_VIEW cellForItemAt \(indexPath)")
+        print("**** COLLECTION_VIEW > cellForItemAt \(indexPath)")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionCell
         cell.titleLabel.text = "\(indexPath)\n\n" + viewModel.titles[indexPath.item]
         return cell
